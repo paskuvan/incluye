@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "generated_at": "2026-09-01",
+  "project": "incluye",
+  "packs": ["ley-21719"],
+  "context": {
+    "entity_constituted": false,
+    "sensitive_data": false,
+    "eu_users": false,
+    "responsable": "fundador/a (por designar formalmente)",
+    "providers": ["supabase (US)", "resend (US)"],
+    "international_transfer": true,
+    "dpo_required": false,
+    "eipd_required": false
+  },
+  "controls": {
+    "gov-responsable": "warn",
+    "gov-registro": "ok",
+    "gov-politicas": "ok",
+    "data-rights-channel": "warn",
+    "data-licitud": "ok",
+    "data-consent-text": "warn",
+    "data-derechos": "warn",
+    "data-info": "warn",
+    "data-minimizacion": "ok",
+    "data-dpa": "warn",
+    "data-transfer": "warn",
+    "data-eipd": "ok",
+    "data-privacy-by-design": "ok",
+    "sec-tls": "ok",
+    "sec-rest": "ok",
+    "sec-passwords": "ok",
+    "sec-mfa": "fail",
+    "sec-logs": "fail",
+    "sec-tenant": "ok",
+    "sec-secrets": "ok",
+    "sec-backups": "warn",
+    "inc-brechas": "warn"
+  },
+  "score": {
+    "ley-21719": {
+      "ok": 11,
+      "warn": 9,
+      "fail": 2,
+      "total": 22,
+      "pct": 50
+    }
+  }
+}

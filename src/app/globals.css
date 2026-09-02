@@ -24,3 +24,54 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* --- Accesibilidad: foco visible por teclado en todo control interactivo.
+   Usa !important para vencer a `outline-none` de los inputs. --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #6366f1 !important;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Respetar la preferencia de menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Impresión / exportar a PDF --- */
+@media print {
+  /* Ocultar todo lo que no sea el reporte (nav, botones, etc.). */
+  .no-print {
+    display: none !important;
+  }
+  /* Forzar fondo blanco y colores exactos (barras, badges). */
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .print-area {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  /* Respetar colores de fondo en la impresión. */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .print-break {
+    break-inside: avoid;
+  }
+}
