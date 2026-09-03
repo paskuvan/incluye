@@ -18,7 +18,7 @@ export default async function EditarEmpresaPage({
 
   const { data: org } = await supabase
     .from("organizations")
-    .select("id, name, rut, employees")
+    .select("id, name, rut, employees, logo_url")
     .eq("id", orgId)
     .single();
   if (!org) notFound();
@@ -51,7 +51,12 @@ export default async function EditarEmpresaPage({
       <EditOrgForm
         orgId={orgId}
         isOwner={me?.role === "owner"}
-        initial={{ name: org.name, rut: org.rut, employees: org.employees }}
+        initial={{
+          name: org.name,
+          rut: org.rut,
+          employees: org.employees,
+          logo_url: org.logo_url,
+        }}
       />
     </div>
   );

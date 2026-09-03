@@ -54,6 +54,7 @@ type Membership = {
     name: string;
     rut: string | null;
     employees: number | null;
+    logo_url: string | null;
   } | null;
 };
 
@@ -62,7 +63,7 @@ export default async function DashboardPage() {
 
   const { data: memberships } = await supabase
     .from("members")
-    .select("role, organizations(id, name, rut, employees)")
+    .select("role, organizations(id, name, rut, employees, logo_url)")
     .returns<Membership[]>();
 
   const orgs = (memberships ?? []).filter((m) => m.organizations);
@@ -211,12 +212,24 @@ export default async function DashboardPage() {
                 className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900"
               >
                 <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <h3 className="truncate text-lg font-semibold">{org.name}</h3>
-                    <p className="mt-0.5 text-xs text-slate-400">
-                      {org.rut ? `RUT ${org.rut} · ` : ""}
-                      {org.employees ?? "—"} trabajadores
-                    </p>
+                  <div className="flex min-w-0 items-center gap-3">
+                    {org.logo_url && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={org.logo_url}
+                        alt=""
+                        className="h-10 w-10 shrink-0 rounded-lg border border-slate-200 object-contain dark:border-slate-700"
+                      />
+                    )}
+                    <div className="min-w-0">
+                      <h3 className="truncate text-lg font-semibold">
+                        {org.name}
+                      </h3>
+                      <p className="mt-0.5 text-xs text-slate-400">
+                        {org.rut ? `RUT ${org.rut} · ` : ""}
+                        {org.employees ?? "—"} trabajadores
+                      </p>
+                    </div>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
                     <Link

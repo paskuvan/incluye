@@ -11,7 +11,12 @@ export default function EditOrgForm({
 }: {
   orgId: string;
   isOwner: boolean;
-  initial: { name: string; rut: string | null; employees: number | null };
+  initial: {
+    name: string;
+    rut: string | null;
+    employees: number | null;
+    logo_url: string | null;
+  };
 }) {
   const router = useRouter();
   const supabase = createClient();
@@ -25,6 +30,43 @@ export default function EditOrgForm({
   const [error, setError] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState("");
   const [deleting, setDeleting] = useState(false);
+  const [logoUrl, setLogoUrl] = useState(initial.logo_url);
+  const [uploading, setUploading] = useState(false);
+
+  async function uploadLogo(file: File) {
+    setUploading(true);
+    setError(null);
+    const ext = file.name.split(".").pop() || "png";
+    const path = `${orgId}/logo-${Date.now()}.${ext}`;
+    const { error: upErr } = await supabase.storage
+      .from("org-logos")
+      .upload(path, file, { upsert: true, contentType: file.type });
+    if (upErr) {
+      setError(upErr.message);
+      setUploading(false);
+      return;
+    }
+    const { data } = supabase.storage.from("org-logos").getPublicUrl(path);
+    const { error: dbErr } = await supabase
+      .from("organizations")
+      .update({ logo_url: data.publicUrl })
+      .eq("id", orgId);
+    if (dbErr) setError(dbErr.message);
+    else {
+      setLogoUrl(data.publicUrl);
+      router.refresh();
+    }
+    setUploading(false);
+  }
+
+  async function removeLogo() {
+    await supabase
+      .from("organizations")
+      .update({ logo_url: null })
+      .eq("id", orgId);
+    setLogoUrl(null);
+    router.refresh();
+  }
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
@@ -74,6 +116,48 @@ export default function EditOrgForm({
         className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900"
       >
         <h2 className="font-semibold">Datos de la empresa</h2>
+
+        {/* Logo */}
+        <div className="mt-4 flex items-center gap-4">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800">
+            {logoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={logoUrl}
+                alt="Logo"
+                className="h-full w-full object-contain"
+              />
+            ) : (
+              <span className="text-2xl text-slate-300" aria-hidden="true">
+                🏢
+              </span>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <label className="cursor-pointer rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium hover:border-indigo-400 dark:border-slate-700">
+              {uploading ? "Subiendo…" : logoUrl ? "Cambiar logo" : "Subir logo"}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) uploadLogo(f);
+                }}
+              />
+            </label>
+            {logoUrl && (
+              <button
+                type="button"
+                onClick={removeLogo}
+                className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs dark:border-slate-700"
+              >
+                Quitar
+              </button>
+            )}
+          </div>
+        </div>
+
         <div className="mt-4 space-y-3">
           <div>
             <label className="block text-sm font-medium">Nombre</label>

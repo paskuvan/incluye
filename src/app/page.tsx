@@ -1,25 +1,29 @@
 import Link from "next/link";
 import PublicNav, { PublicFooter } from "@/components/public-nav";
 import { createClient } from "@/lib/supabase/server";
-import { TOTAL_EMPRESAS } from "@/lib/reference/empresas-inclusivas";
 
 export default async function Home() {
   const supabase = await createClient();
-  const [vacantesRes, senasRes, recursosRes] = await Promise.all([
+  const [vacantesRes, senasRes, recursosRes, expRes] = await Promise.all([
     supabase
       .from("jobs")
       .select("id", { count: "exact", head: true })
       .eq("status", "open"),
     supabase.from("lsch_terms").select("id", { count: "exact", head: true }),
     supabase.from("resources").select("id", { count: "exact", head: true }),
+    supabase
+      .from("experiences")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "approved"),
   ]);
   const vacantes = vacantesRes.count;
   const senas = senasRes.count;
   const recursos = recursosRes.count;
+  const experiencias = expRes.count;
 
   const stats = [
     { value: `${vacantes ?? 0}`, label: "Vacantes inclusivas", href: "/empleos" },
-    { value: `${TOTAL_EMPRESAS}+`, label: "Empresas referentes", href: "/empresas" },
+    { value: `${experiencias ?? 0}`, label: "Experiencias reales", href: "/experiencias" },
     { value: `${senas ?? 0}`, label: "Señas en el glosario", href: "/glosario" },
     { value: `${recursos ?? 0}`, label: "Recursos y guías", href: "/recursos" },
   ];
@@ -179,10 +183,10 @@ const comunidad = [
     href: "/glosario",
   },
   {
-    icon: "🏅",
-    title: "Empresas referentes",
-    desc: "Directorio de empresas líderes en inclusión (ReIN).",
-    href: "/empresas",
+    icon: "💬",
+    title: "Experiencias reales",
+    desc: "Lo que vivió la comunidad: transparencia contra la falsa inclusión.",
+    href: "/experiencias",
   },
   {
     icon: "🧑‍💼",

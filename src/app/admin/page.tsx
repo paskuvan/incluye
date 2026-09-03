@@ -34,6 +34,17 @@ export default function AdminHome() {
         </Link>
 
         <Link
+          href="/admin/experiencias"
+          className="rounded-2xl border border-slate-200 bg-white p-6 transition-colors hover:border-indigo-400 dark:border-slate-800 dark:bg-slate-900"
+        >
+          <div className="text-2xl">💬</div>
+          <h2 className="mt-3 font-semibold">Experiencias</h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            Modera las experiencias enviadas por la comunidad.
+          </p>
+        </Link>
+
+        <Link
           href="/admin/empleos"
           className="rounded-2xl border border-slate-200 bg-white p-6 transition-colors hover:border-indigo-400 dark:border-slate-800 dark:bg-slate-900"
         >

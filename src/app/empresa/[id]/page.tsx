@@ -10,6 +10,7 @@ type PublicCompany = {
   score: number | null;
   assessed_at: string | null;
   certified_gestores: number;
+  logo_url: string | null;
 };
 type PublicJob = {
   id: string;
@@ -81,14 +82,26 @@ export default async function EmpresaPublicaPage({
         <span className="inline-block rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
           Perfil de inclusión
         </span>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-          {company.name}
-        </h1>
-        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-          {company.employees != null
-            ? `${company.employees} trabajadores`
-            : ""}
-        </p>
+        <div className="mt-4 flex items-center gap-4">
+          {company.logo_url && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={company.logo_url}
+              alt={`Logo de ${company.name}`}
+              className="h-16 w-16 shrink-0 rounded-xl border border-slate-200 object-contain dark:border-slate-800"
+            />
+          )}
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              {company.name}
+            </h1>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              {company.employees != null
+                ? `${company.employees} trabajadores`
+                : ""}
+            </p>
+          </div>
+        </div>
 
         {/* Sello: comunicación con personas sordas */}
         {esReferenteSordos && (

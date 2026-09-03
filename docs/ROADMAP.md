@@ -137,3 +137,19 @@
 - [x] Página /dashboard/cuenta: ver email, cambiar contraseña, cambiar email
 - [x] Eliminar cuenta (derecho ARCO) vía función `delete_my_account` (`supabase/migrations/0013_delete_account.sql`)
 - [x] Acceso desde el email en el header del dashboard
+
+## Fase 24 — Experiencias / transparencia contra la falsa inclusión (hecho)
+- [x] Tabla `experiences` con RLS (público ve aprobadas, envío público como 'pending', admin modera) (`supabase/migrations/0014_experiencias.sql`)
+- [x] Página pública /experiencias: compartir experiencia (anónima, moderada) + listado con señales (comunicación, proceso, inclusión real)
+- [x] Moderación en /admin/experiencias (aprobar/rechazar/eliminar)
+- [x] Enlaces en nav público y admin
+
+## Fase 25 — "Empresas" reemplazada por voz de la comunidad (hecho)
+- [x] Quitada la lista ReIN estática; /empresas ahora agrega experiencias aprobadas por empresa (sin migración)
+- [x] Señales reales: "inclusión real" y "comunicación accesible" (% desde experiencias)
+- [x] Home: KPI y tarjeta pasan de "Empresas referentes" a "Experiencias reales"
+- [x] Eliminados archivos ReIN sin uso (empresas-inclusivas.ts, empresas-grid.tsx)
+
+## Fase 26 — Logo / avatar de empresa (hecho)
+- [x] `organizations.logo_url` + bucket Storage `org-logos` (RLS por org) + `get_public_company` con logo (`supabase/migrations/0015_org_logo.sql`)
+- [x] Subir/cambiar/quitar logo en editar empresa; se muestra en el panel y el perfil público
