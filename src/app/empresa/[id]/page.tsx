@@ -55,6 +55,14 @@ export default async function EmpresaPublicaPage({
   const company = (data as PublicCompany[] | null)?.[0];
   if (!company) notFound();
 
+  // Sello "Comunicación con personas sordas": puntaje del área comunicación.
+  const { data: deafScore } = await supabase.rpc(
+    "public_company_deaf_score",
+    { oid: id },
+  );
+  const esReferenteSordos =
+    typeof deafScore === "number" && deafScore >= 67;
+
   const { data: jobs } = await supabase
     .from("jobs")
     .select("id, title, region, modality, apply_url, apply_email")
@@ -81,6 +89,14 @@ export default async function EmpresaPublicaPage({
             ? `${company.employees} trabajadores`
             : ""}
         </p>
+
+        {/* Sello: comunicación con personas sordas */}
+        {esReferenteSordos && (
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-sm font-medium text-indigo-800 dark:border-indigo-900 dark:bg-indigo-950/50 dark:text-indigo-200">
+            <span aria-hidden="true">🤟</span>
+            Referente en comunicación con personas sordas
+          </div>
+        )}
 
         {/* Métricas */}
         <div className="mt-6 grid gap-4 sm:grid-cols-3">

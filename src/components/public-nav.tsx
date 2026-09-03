@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/empleos", label: "Empleos" },
   { href: "/empresas", label: "Empresas" },
   { href: "/gestores", label: "Gestores" },
+  { href: "/interpretes", label: "Intérpretes" },
   { href: "/recursos", label: "Recursos" },
   { href: "/glosario", label: "Glosario LSCh" },
 ];

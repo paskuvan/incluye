@@ -124,3 +124,11 @@
 - [x] `jobs.organization_id` opcional + `source`/`source_name` + política admin (`supabase/migrations/0011_jobs_externas.sql`)
 - [x] Panel admin /admin/empleos: curar vacantes de otras empresas con enlace a la fuente
 - [x] Badge "Externa" en la bolsa pública /empleos
+
+## Fase 21 — Sello "Comunicación con personas sordas" (hecho)
+- [x] Función `public_company_deaf_score` (puntaje del área comunicación, solo perfiles públicos) (`supabase/migrations/0012_deaf_score.sql`)
+- [x] Sello en el perfil público /empresa/[id] cuando el puntaje ≥ 67%
+
+## Fase 22 — Página de intérpretes LSCh (hecho)
+- [x] /interpretes: cómo encontrar/verificar intérpretes, enlaces a ASOCH y ChileValora (sin scrapear datos personales)
+- [x] Enlace en el nav público
