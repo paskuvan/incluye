@@ -132,3 +132,8 @@
 ## Fase 22 — Página de intérpretes LSCh (hecho)
 - [x] /interpretes: cómo encontrar/verificar intérpretes, enlaces a ASOCH y ChileValora (sin scrapear datos personales)
 - [x] Enlace en el nav público
+
+## Fase 23 — Perfil / cuenta de usuario (hecho)
+- [x] Página /dashboard/cuenta: ver email, cambiar contraseña, cambiar email
+- [x] Eliminar cuenta (derecho ARCO) vía función `delete_my_account` (`supabase/migrations/0013_delete_account.sql`)
+- [x] Acceso desde el email en el header del dashboard

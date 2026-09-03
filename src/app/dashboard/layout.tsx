@@ -32,9 +32,12 @@ export default async function DashboardLayout({
             incluye<span className="text-indigo-500">.</span>
           </Link>
           <div className="flex items-center gap-4 text-sm">
-            <span className="hidden text-slate-500 sm:inline dark:text-slate-400">
+            <Link
+              href="/dashboard/cuenta"
+              className="hidden text-slate-500 hover:text-indigo-600 sm:inline dark:text-slate-400 dark:hover:text-indigo-400"
+            >
               {user.email}
-            </span>
+            </Link>
             {isAdmin && (
               <Link
                 href="/admin"
