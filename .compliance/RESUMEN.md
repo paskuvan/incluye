@@ -23,17 +23,23 @@ Decisiones resueltas:
 - ✅ Plan de respuesta a brechas + registro de vulneraciones
 - ✅ EIPD (test → no obligatoria)
 
+## Implementado el 4 de septiembre de 2026 (código)
+- ✅ **Consentimiento en el registro**: checkbox obligatorio (no premarcado) con enlace a la política + registro versionado en tabla `consents` (`supabase/migrations/0017_privacy_rights.sql`, `src/app/login/page.tsx`, `src/lib/legal.ts`). → control `data-consent-text`.
+- ✅ **Descargar mis datos** (acceso + portabilidad, Art. 5): función `export_my_data()` + botón en `/dashboard/cuenta`. Junto a "eliminar mi cuenta" (0013) completa los derechos ARCO. → controles `data-derechos` y `data-rights-channel`.
+- ℹ️ **Cookies**: solo cookies de sesión de Supabase (estrictamente necesarias) → no requieren banner de consentimiento.
+
+Postura: **50% → 64%**.
+
 ## Brechas priorizadas (qué falta)
 **Rápidas / documentales**
 1. **Completar los `[COMPLETAR]`** cuando constituyas la sociedad (razón social, RUT, domicilio, representante, correo de contacto de datos).
-2. **Publicar la política de privacidad y los términos** en la web y **enlazarlos en el registro** (checkbox "acepto…", no premarcado).
+2. **Aplicar la migración `0017`** en Supabase (crea `consents` + `export_my_data`).
 3. **Firmar/aceptar** los DPA de Supabase y Resend y adjuntar las cláusulas modelo (Anexo de transferencia).
 
 **Requieren código (puedo construirlas)**
-4. **Botón "descargar mis datos" y "eliminar mi cuenta"** en el panel → automatiza acceso, portabilidad y supresión (derechos ARCO).
-5. **Registro de consentimiento** (qué aceptó cada usuario, cuándo y qué versión).
-6. **MFA (doble factor)** — hoy no está. Supabase lo soporta.
-7. **Registro de auditoría** (quién accede/cambia qué) — ayuda a detectar brechas (Art. 14 sexies).
+4. **MFA (doble factor)** — hoy no está. Supabase lo soporta. → `sec-mfa`.
+5. **Registro de auditoría** (quién accede/cambia qué) — ayuda a detectar brechas (Art. 14 sexies). → `sec-logs`.
+6. **Aviso al recolectar** (`data-info`): breve nota de finalidad en los formularios que capturan datos.
 
 ## Insumos externos (no self-service)
 - Constituir la sociedad (para tener razón social/RUT reales).

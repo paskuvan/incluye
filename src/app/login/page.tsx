@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { POLICY_VERSION } from "@/lib/legal";
 
 type Mode = "signin" | "signup";
 
@@ -13,6 +14,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [acceptPolicy, setAcceptPolicy] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -42,11 +44,25 @@ export default function LoginPage() {
         router.refresh();
       }
     } else {
+      if (!acceptPolicy) {
+        setError(
+          "Debes aceptar la Política de privacidad para crear tu cuenta.",
+        );
+        setLoading(false);
+        return;
+      }
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           emailRedirectTo: `${window.location.origin}/auth/confirm`,
+          // El consentimiento viaja en los metadatos y lo persiste el trigger
+          // handle_new_user_consent (funciona con o sin confirmación de email).
+          data: {
+            consent_policy_version: POLICY_VERSION,
+            consent_user_agent:
+              typeof navigator !== "undefined" ? navigator.userAgent : null,
+          },
         },
       });
       if (error) {
@@ -168,6 +184,28 @@ export default function LoginPage() {
               )}
             </div>
 
+            {mode === "signup" && (
+              <label className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
+                <input
+                  type="checkbox"
+                  checked={acceptPolicy}
+                  onChange={(e) => setAcceptPolicy(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800"
+                />
+                <span>
+                  He leído y acepto la{" "}
+                  <Link
+                    href="/privacidad"
+                    target="_blank"
+                    className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+                  >
+                    Política de privacidad
+                  </Link>{" "}
+                  y el tratamiento de mis datos según la Ley 21.719.
+                </span>
+              </label>
+            )}
+
             {error && (
               <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950/40 dark:text-red-400">
                 {error}
@@ -181,7 +219,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || (mode === "signup" && !acceptPolicy)}
               className="w-full rounded-lg bg-indigo-600 py-2.5 text-sm font-medium text-white transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading

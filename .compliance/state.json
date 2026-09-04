@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "generated_at": "2026-09-01",
+  "version": 2,
+  "generated_at": "2026-09-04",
   "project": "incluye",
   "packs": ["ley-21719"],
   "context": {
@@ -17,10 +17,10 @@
     "gov-responsable": "warn",
     "gov-registro": "ok",
     "gov-politicas": "ok",
-    "data-rights-channel": "warn",
+    "data-rights-channel": "ok",
     "data-licitud": "ok",
-    "data-consent-text": "warn",
-    "data-derechos": "warn",
+    "data-consent-text": "ok",
+    "data-derechos": "ok",
     "data-info": "warn",
     "data-minimizacion": "ok",
     "data-dpa": "warn",
@@ -39,11 +39,11 @@
   },
   "score": {
     "ley-21719": {
-      "ok": 11,
-      "warn": 9,
+      "ok": 14,
+      "warn": 6,
       "fail": 2,
       "total": 22,
-      "pct": 50
+      "pct": 64
     }
   }
 }
