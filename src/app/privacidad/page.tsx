@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PublicNav, { PublicFooter } from "@/components/public-nav";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidad · Incluye",
+  title: "Política de Privacidad",
   description:
     "Cómo Incluye trata tus datos personales conforme a la Ley 21.719 de Chile.",
 };

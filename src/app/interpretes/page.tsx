@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PublicNav, { PublicFooter } from "@/components/public-nav";
 
 export const metadata: Metadata = {
-  title: "Intérpretes de LSCh · Incluye",
+  title: "Intérpretes de LSCh",
   description:
     "Cómo encontrar y verificar intérpretes de Lengua de Señas Chilena certificados en Chile (ChileValora).",
 };

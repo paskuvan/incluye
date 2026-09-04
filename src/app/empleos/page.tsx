@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import EmpleosView, { type Job } from "./empleos-view";
 
 export const metadata: Metadata = {
-  title: "Empleos inclusivos · Incluye",
+  title: "Empleos inclusivos",
   description:
     "Vacantes de empresas comprometidas con la inclusión laboral de personas con discapacidad en Chile.",
 };

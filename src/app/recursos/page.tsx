@@ -4,7 +4,7 @@ import PublicNav, { PublicFooter } from "@/components/public-nav";
 import { getRecursos } from "@/lib/reference/get-recursos";
 
 export const metadata: Metadata = {
-  title: "Recursos de inclusión · Incluye",
+  title: "Recursos de inclusión",
   description:
     "Biblioteca de guías y recursos para la inclusión laboral y la accesibilidad en tu empresa.",
 };

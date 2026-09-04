@@ -16,7 +16,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const guia = GUIAS[slug];
   return {
-    title: guia ? `${guia.titulo} · Incluye` : "Recurso · Incluye",
+    title: guia ? `${guia.titulo}` : "Recurso",
     description: guia?.resumen,
   };
 }

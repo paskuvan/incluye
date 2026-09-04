@@ -4,7 +4,7 @@ import PublicNav, { PublicFooter } from "@/components/public-nav";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
-  title: "Empresas según la comunidad · Incluye",
+  title: "Empresas según la comunidad",
   description:
     "Empresas valoradas por experiencias reales de personas con discapacidad. Transparencia, no autodeclaración.",
 };

@@ -4,7 +4,7 @@ import { getGlosario } from "@/lib/reference/get-glosario";
 import GlosarioView from "./glosario-view";
 
 export const metadata: Metadata = {
-  title: "Glosario de Lengua de Señas Chilena · Incluye",
+  title: "Glosario de Lengua de Señas Chilena",
   description:
     "Señas útiles de Lengua de Señas Chilena (LSCh) por rubro para equipos de atención.",
 };

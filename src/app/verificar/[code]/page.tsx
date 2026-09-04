@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { scoreLevel } from "@/lib/assessment/scoring";
 
 export const metadata: Metadata = {
-  title: "Verificar certificado · Incluye",
+  title: "Verificar certificado",
 };
 
 type VerifyRow = { name: string; score: number | null; issued_at: string };

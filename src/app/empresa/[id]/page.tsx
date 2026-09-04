@@ -37,7 +37,7 @@ export async function generateMetadata({
   const { data } = await supabase.rpc("get_public_company", { oid: id });
   const c = (data as PublicCompany[] | null)?.[0];
   return {
-    title: c ? `${c.name} · Incluye` : "Empresa · Incluye",
+    title: c ? `${c.name}` : "Empresa",
     description: c
       ? `Perfil de inclusión de ${c.name} en Incluye.`
       : undefined,

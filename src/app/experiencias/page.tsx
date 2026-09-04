@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import ExperienceForm from "./experience-form";
 
 export const metadata: Metadata = {
-  title: "Experiencias · Incluye",
+  title: "Experiencias",
   description:
     "Experiencias reales de personas con discapacidad en procesos de inclusión laboral. Transparencia contra la falsa inclusión.",
 };

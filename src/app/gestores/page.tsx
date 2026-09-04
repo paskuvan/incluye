@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PublicNav, { PublicFooter } from "@/components/public-nav";
 
 export const metadata: Metadata = {
-  title: "Gestores de inclusión laboral · Incluye",
+  title: "Gestores de inclusión laboral",
   description:
     "Qué es un gestor(a) de inclusión laboral, qué exige la ley y cómo verificar su certificación en el registro oficial de ChileValora.",
 };

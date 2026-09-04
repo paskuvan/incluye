@@ -3,7 +3,7 @@ import PublicNav, { PublicFooter } from "@/components/public-nav";
 import VerifyForm from "./verify-form";
 
 export const metadata: Metadata = {
-  title: "Verificar certificado · Incluye",
+  title: "Verificar certificado",
   description:
     "Verifica la autenticidad de un certificado de inclusión emitido por Incluye.",
 };

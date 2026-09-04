@@ -12,9 +12,16 @@ export default function LoginPage() {
   const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  function switchMode(next: Mode) {
+    setMode(next);
+    setError(null);
+    setMessage(null);
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -57,6 +64,11 @@ export default function LoginPage() {
     setLoading(false);
   }
 
+  const field =
+    "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition-colors placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100";
+  const labelCls =
+    "block text-sm font-medium text-slate-700 dark:text-slate-200";
+
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-6 dark:bg-slate-950">
       <div className="w-full max-w-sm">
@@ -68,49 +80,101 @@ export default function LoginPage() {
         </Link>
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-          <h1 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-            {mode === "signin" ? "Ingresar" : "Crear cuenta"}
-          </h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          {/* Selector segmentado Ingresar / Crear cuenta */}
+          <div
+            role="tablist"
+            aria-label="Ingresar o crear cuenta"
+            className="grid grid-cols-2 gap-1 rounded-xl bg-slate-100 p-1 dark:bg-slate-800"
+          >
+            {([
+              { m: "signin" as Mode, label: "Ingresar" },
+              { m: "signup" as Mode, label: "Crear cuenta" },
+            ]).map((t) => {
+              const active = mode === t.m;
+              return (
+                <button
+                  key={t.m}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => switchMode(t.m)}
+                  className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    active
+                      ? "bg-indigo-600 text-white shadow-sm"
+                      : "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                  }`}
+                >
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
+
+          <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
             {mode === "signin"
               ? "Accede al panel de tu empresa."
               : "Registra tu empresa en Incluye."}
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          <form onSubmit={handleSubmit} className="mt-5 space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+              <label htmlFor="login-email" className={labelCls}>
                 Email
               </label>
               <input
+                id="login-email"
                 type="email"
                 required
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                className={`${field} mt-1.5`}
                 placeholder="tu@empresa.cl"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+              <label htmlFor="login-password" className={labelCls}>
                 Contraseña
               </label>
-              <input
-                type="password"
-                required
-                minLength={6}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-                placeholder="••••••••"
-              />
+              <div className="relative mt-1.5">
+                <input
+                  id="login-password"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  minLength={6}
+                  autoComplete={
+                    mode === "signin" ? "current-password" : "new-password"
+                  }
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className={`${field} pr-16`}
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((s) => !s)}
+                  aria-label={
+                    showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+                  }
+                  className="absolute inset-y-0 right-0 flex items-center px-3 text-xs font-medium text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400"
+                >
+                  {showPassword ? "Ocultar" : "Mostrar"}
+                </button>
+              </div>
+              {mode === "signup" && (
+                <p className="mt-1 text-xs text-slate-400">
+                  Mínimo 6 caracteres.
+                </p>
+              )}
             </div>
 
             {error && (
-              <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+              <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950/40 dark:text-red-400">
+                {error}
+              </p>
             )}
             {message && (
-              <p className="text-sm text-green-600 dark:text-green-400">
+              <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700 dark:bg-green-950/40 dark:text-green-300">
                 {message}
               </p>
             )}
@@ -118,7 +182,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-lg bg-indigo-600 py-2 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-60"
+              className="w-full rounded-lg bg-indigo-600 py-2.5 text-sm font-medium text-white transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading
                 ? "Cargando…"
@@ -129,7 +193,7 @@ export default function LoginPage() {
           </form>
 
           {mode === "signin" && (
-            <p className="mt-3 text-center text-sm">
+            <p className="mt-4 text-center text-sm">
               <Link
                 href="/recuperar"
                 className="text-slate-500 hover:text-indigo-600 hover:underline dark:text-slate-400"
@@ -138,20 +202,6 @@ export default function LoginPage() {
               </Link>
             </p>
           )}
-
-          <p className="mt-4 text-center text-sm text-slate-500 dark:text-slate-400">
-            {mode === "signin" ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?"}{" "}
-            <button
-              onClick={() => {
-                setMode(mode === "signin" ? "signup" : "signin");
-                setError(null);
-                setMessage(null);
-              }}
-              className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
-            >
-              {mode === "signin" ? "Regístrate" : "Ingresa"}
-            </button>
-          </p>
         </div>
       </div>
     </main>
