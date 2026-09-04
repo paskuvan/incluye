@@ -153,3 +153,11 @@
 ## Fase 26 — Logo / avatar de empresa (hecho)
 - [x] `organizations.logo_url` + bucket Storage `org-logos` (RLS por org) + `get_public_company` con logo (`supabase/migrations/0015_org_logo.sql`)
 - [x] Subir/cambiar/quitar logo en editar empresa; se muestra en el panel y el perfil público
+
+## Fase 27 — SEO (hecho)
+- [x] Metadata global: `metadataBase`, plantilla de títulos, Open Graph + Twitter Card, keywords, robots (`src/app/layout.tsx`, `src/lib/site.ts`)
+- [x] `robots.txt` (bloquea panel/admin/auth) y `sitemap.xml` (rutas públicas + perfiles de empresa dinámicos) (`src/app/robots.ts`, `src/app/sitemap.ts`)
+- [x] Imagen social generada con `next/og` (dark, identidad de marca) para OG y Twitter (`src/app/opengraph-image.tsx`, `src/app/twitter-image.tsx`)
+- [x] `manifest.webmanifest` (PWA básica) (`src/app/manifest.ts`)
+- [x] Función `list_public_companies()` para el sitemap (`supabase/migrations/0016_public_list.sql`)
+- [ ] En producción: definir `NEXT_PUBLIC_SITE_URL` en Vercel con el dominio real
