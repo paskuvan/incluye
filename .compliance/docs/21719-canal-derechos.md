@@ -3,7 +3,7 @@
 > Art. 14 ter: el responsable debe ofrecer un medio para que el titular ejerza sus derechos.
 
 ## 1. Texto público ("Tus derechos", para la web/política)
-> Como titular de tus datos puedes ejercer estos derechos: **acceso, rectificación, supresión, oposición, portabilidad y bloqueo**. Escríbenos a **[COMPLETAR: correo]**. Responderemos dentro de los plazos legales y sin costo en los casos que la ley establece.
+> Como titular de tus datos puedes ejercer estos derechos: **acceso, rectificación, supresión, oposición, portabilidad y bloqueo**. Escríbenos a **hola@codisenas.com**. Responderemos dentro de los plazos legales y sin costo en los casos que la ley establece.
 
 ## 2. Procedimiento interno (plazos verificados contra la ley)
 1. **Recepción:** registra la solicitud (titular, derecho pedido, fecha) y verifica identidad.

@@ -3,7 +3,7 @@
 **Última actualización:** 1 de septiembre de 2026
 
 ## 1. Responsable del tratamiento
-**[COMPLETAR: razón social]**, RUT **[COMPLETAR: RUT]**, domicilio **[COMPLETAR: domicilio]**, operadora de la plataforma **Incluye**. Contacto para datos personales: **[COMPLETAR: correo — sugerido privacidad@tudominio.cl]**.
+**María José Paschcuan (persona natural)**, RUT **16.476.483-4**, domicilio **Avenida Suecia 2624, depto. 405, Providencia, Santiago**, operadora de la plataforma **Incluye**. Contacto para datos personales: **hola@codisenas.com**.
 
 > Rol dual: Incluye es **responsable** de los datos de las cuentas de sus usuarios (las personas que se registran) y **encargado** respecto de los datos personales que cada empresa cliente carga en la plataforma (por ejemplo, los datos de su gestor de inclusión o de las personas que invita a su equipo), que trata por cuenta de esa empresa según el DPA correspondiente.
 
@@ -38,11 +38,11 @@ Algunos procesan datos **fuera de Chile**; la transferencia se ampara en las **C
 ## 5. Por cuánto tiempo
 - **Cuenta y datos de la empresa:** mientras la cuenta esté activa y hasta **12 meses** después de darla de baja; luego se eliminan o anonimizan.
 - **Registros técnicos / logs:** hasta **12 meses**.
-- **Datos de postulación a vacantes:** durante el proceso de selección y hasta **[COMPLETAR: p. ej. 6 meses]** después, salvo consentimiento para conservarlos más.
+- **Datos de postulación a vacantes:** durante el proceso de selección y hasta **6 meses** después, salvo consentimiento para conservarlos más.
 - Conservamos lo mínimo necesario y solo por obligación legal cuando aplique.
 
 ## 6. Tus derechos
-Puedes ejercer **acceso, rectificación, supresión, oposición, portabilidad y bloqueo**, y **retirar tu consentimiento** cuando quieras, escribiendo a **[COMPLETAR: correo]**. Respondemos en **30 días corridos** (prorrogables una sola vez por 30 días más). La rectificación, supresión y oposición son siempre gratuitas; el acceso es gratuito al menos una vez por trimestre.
+Puedes ejercer **acceso, rectificación, supresión, oposición, portabilidad y bloqueo**, y **retirar tu consentimiento** cuando quieras, escribiendo a **hola@codisenas.com**. Respondemos en **30 días corridos** (prorrogables una sola vez por 30 días más). La rectificación, supresión y oposición son siempre gratuitas; el acceso es gratuito al menos una vez por trimestre.
 
 ## 7. Decisiones automatizadas
 No tomamos decisiones automatizadas con efectos jurídicos o significativos sobre las personas. El puntaje de accesibilidad se calcula sobre la **empresa** a partir de sus propias respuestas, no perfila ni evalúa a personas.

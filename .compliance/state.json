@@ -7,7 +7,7 @@
     "entity_constituted": false,
     "sensitive_data": false,
     "eu_users": false,
-    "responsable": "fundador/a (por designar formalmente)",
+    "responsable": "María José Paschcuan (persona natural)",
     "providers": ["supabase (US)", "resend (US)"],
     "international_transfer": true,
     "dpo_required": false,

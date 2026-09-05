@@ -28,11 +28,12 @@ export default function PrivacidadPage() {
               1. Responsable del tratamiento
             </h2>
             <p className="mt-2">
-              <strong>[COMPLETAR: razón social]</strong>, RUT{" "}
-              <strong>[COMPLETAR: RUT]</strong>, domicilio{" "}
-              <strong>[COMPLETAR: domicilio]</strong>, operadora de la
-              plataforma Incluye. Contacto para datos personales:{" "}
-              <strong>[COMPLETAR: correo]</strong>.
+              <strong>María José Paschcuan</strong> (persona natural), RUT{" "}
+              <strong>16.476.483-4</strong>, con domicilio en{" "}
+              <strong>Avenida Suecia 2624, depto. 405, Providencia, Santiago</strong>
+              , operadora de la plataforma Incluye. Contacto para datos
+              personales:{" "}
+              <strong>hola@codisenas.com</strong>.
             </p>
             <p className="mt-2 text-slate-500 dark:text-slate-400">
               Incluye es <em>responsable</em> de los datos de las cuentas de sus
@@ -176,7 +177,7 @@ export default function PrivacidadPage() {
               descargar tus datos (acceso y portabilidad), cambiar tu correo o
               contraseña (rectificación) y eliminar tu cuenta (supresión).
               También puedes escribir a{" "}
-              <strong>[COMPLETAR: correo]</strong>; respondemos en 30 días
+              <strong>hola@codisenas.com</strong>; respondemos en 30 días
               corridos (prorrogables una sola vez por 30 más). La rectificación,
               supresión y oposición son siempre gratuitas; el acceso es gratuito
               al menos una vez por trimestre.

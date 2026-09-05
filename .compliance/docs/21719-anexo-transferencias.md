@@ -3,13 +3,13 @@
 > Ampara el envío de datos personales fuera de Chile (Supabase y Resend, ambos en EE.UU.). Mecanismo: **Cláusulas Contractuales Modelo** aprobadas por el Ministerio de Economía (Resolución RAEX202503748, Diario Oficial 19-12-2025).
 
 ## Transferencia 1 — Supabase
-- **Exportador:** [COMPLETAR: razón social de Incluye], RUT [COMPLETAR: RUT] (Chile).
+- **Exportador:** María José Paschcuan (persona natural), operadora de Incluye, RUT 16.476.483-4 (Chile).
 - **Importador:** Supabase (EE.UU.).
 - **Categorías de datos:** correo y contraseña (hash), datos de empresa, gestores, invitaciones, vacantes, respuestas de evaluación.
 - **Finalidad:** base de datos, autenticación y almacenamiento de la plataforma.
 
 ## Transferencia 2 — Resend
-- **Exportador:** [COMPLETAR: razón social de Incluye], RUT [COMPLETAR: RUT] (Chile).
+- **Exportador:** María José Paschcuan (persona natural), operadora de Incluye, RUT 16.476.483-4 (Chile).
 - **Importador:** Resend (EE.UU.).
 - **Categorías de datos:** correo del destinatario y contenido de los correos transaccionales.
 - **Finalidad:** envío de correos (recuperación de clave, invitaciones, recordatorios).

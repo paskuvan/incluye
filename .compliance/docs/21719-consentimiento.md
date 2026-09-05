@@ -5,7 +5,7 @@
 En Incluye, el tratamiento principal (crear la cuenta y usar el servicio) se basa en la **ejecución del contrato**, no en el consentimiento. El consentimiento se usa para: (a) marketing, si lo activas, y (b) la postulación de candidatos a vacantes. Igual conviene mostrar el aviso de información en el registro.
 
 ## 1. Aviso corto (en el registro / punto de captura)
-> Tus datos (correo y contraseña) los trata Incluye para crear tu cuenta y prestarte el servicio. Puedes ejercer tus derechos en [COMPLETAR: correo]. Más detalles en nuestra [Política de Privacidad](/privacidad).
+> Tus datos (correo y contraseña) los trata Incluye para crear tu cuenta y prestarte el servicio. Puedes ejercer tus derechos en hola@codisenas.com. Más detalles en nuestra [Política de Privacidad](/privacidad).
 
 ## 2. Registro de usuario (no requiere checkbox de consentimiento, pero sí aceptación de términos)
 > ☐ He leído y acepto la [Política de Privacidad](/privacidad) y los [Términos de uso](/terminos).
