@@ -19,7 +19,7 @@ export default function PrivacidadPage() {
           Política de Privacidad
         </h1>
         <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-          Última actualización: 1 de septiembre de 2026 · Ley 21.719 de Chile
+          Última actualización: 4 de septiembre de 2026 · Ley 21.719 de Chile
         </p>
 
         <div className="prose-incluye mt-8 space-y-8 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
@@ -36,8 +36,9 @@ export default function PrivacidadPage() {
             </p>
             <p className="mt-2 text-slate-500 dark:text-slate-400">
               Incluye es <em>responsable</em> de los datos de las cuentas de sus
-              usuarios y <em>encargado</em> respecto de los datos que cada
-              empresa cliente carga en la plataforma.
+              usuarios y de los perfiles de las personas candidatas, y{" "}
+              <em>encargado</em> respecto de los datos que cada empresa cliente
+              carga en la plataforma.
             </p>
           </section>
 
@@ -61,8 +62,27 @@ export default function PrivacidadPage() {
                 <strong>Invitaciones:</strong> correo de la persona invitada.
               </li>
               <li>
-                <strong>Vacantes / postulación:</strong> correo o enlace de
-                postulación.
+                <strong>Vacantes:</strong> datos de la vacante y correo o enlace
+                de postulación.
+              </li>
+              <li>
+                <strong>Perfil de candidato/a:</strong> nombre, región, titular,
+                descripción, habilidades, correo de contacto y si usas Lengua de
+                Señas Chilena. Lo creas y editas tú, de forma voluntaria.
+              </li>
+              <li>
+                <strong>Postulaciones:</strong> a qué vacante postulaste, tu
+                mensaje y el estado de la postulación.
+              </li>
+              <li>
+                <strong>Consentimiento:</strong> versión de esta política que
+                aceptaste, fecha y datos técnicos del navegador (para acreditar
+                el consentimiento).
+              </li>
+              <li>
+                <strong>Seguridad:</strong> registro de auditoría de acciones
+                sensibles (quién, qué y cuándo) y, si la activas, tu segundo
+                factor de autenticación (MFA).
               </li>
               <li>
                 <strong>Uso:</strong> respuestas de la autoevaluación (sobre la
@@ -70,9 +90,14 @@ export default function PrivacidadPage() {
               </li>
             </ul>
             <p className="mt-2">
-              <strong>No tratamos datos sensibles.</strong> La autoevaluación
-              mide la accesibilidad de la empresa; no pedimos información sobre
-              la salud ni la discapacidad de personas identificadas.
+              <strong>Sobre datos sensibles.</strong> No pedimos datos sensibles
+              ni son necesarios para usar la plataforma. Sin embargo, al crear tu
+              perfil de candidato/a puedes decidir compartir información que
+              revele tu discapacidad (por ejemplo, que usas LSCh). Ese dato es{" "}
+              <strong>sensible</strong> y solo lo tratamos con tu{" "}
+              <strong>consentimiento explícito</strong>, con la única finalidad
+              de conectarte con empleos realmente inclusivos. Puedes omitirlo o
+              eliminarlo cuando quieras.
             </p>
           </section>
 
@@ -95,6 +120,9 @@ export default function PrivacidadPage() {
                     ["Datos de gestor y miembros (cargados por la empresa)", "Interés legítimo / contrato"],
                     ["Correos transaccionales", "Ejecución / interés legítimo"],
                     ["Vacantes y postulación", "Consentimiento / ejecución"],
+                    ["Perfil de candidato/a (incl. uso de LSCh)", "Consentimiento explícito"],
+                    ["Registro de consentimiento y auditoría", "Cumplimiento legal (Ley 21.719)"],
+                    ["Verificación en dos pasos (MFA)", "Interés legítimo (seguridad)"],
                     ["Marketing (si lo hubiera)", "Consentimiento"],
                   ].map(([a, b]) => (
                     <tr key={a}>
@@ -128,8 +156,11 @@ export default function PrivacidadPage() {
             </h2>
             <p className="mt-2">
               Cuenta y datos de la empresa: mientras la cuenta esté activa y
-              hasta 12 meses después de darla de baja. Registros técnicos: hasta
-              12 meses. Luego se eliminan o anonimizan.
+              hasta 12 meses después de darla de baja. Perfil de candidato/a y
+              postulaciones: mientras mantengas tu perfil; al eliminarlo se
+              borran. Registro de consentimiento y de auditoría: se conservan
+              como prueba de cumplimiento por el plazo legal aplicable. Registros
+              técnicos: hasta 12 meses. Luego se eliminan o anonimizan.
             </p>
           </section>
 
@@ -140,8 +171,12 @@ export default function PrivacidadPage() {
             <p className="mt-2">
               Puedes ejercer <strong>acceso, rectificación, supresión,
               oposición, portabilidad y bloqueo</strong>, y retirar tu
-              consentimiento cuando quieras, escribiendo a{" "}
-              <strong>[COMPLETAR: correo]</strong>. Respondemos en 30 días
+              consentimiento cuando quieras. Desde{" "}
+              <strong>Mi cuenta</strong> puedes hacerlo tú mismo/a al instante:
+              descargar tus datos (acceso y portabilidad), cambiar tu correo o
+              contraseña (rectificación) y eliminar tu cuenta (supresión).
+              También puedes escribir a{" "}
+              <strong>[COMPLETAR: correo]</strong>; respondemos en 30 días
               corridos (prorrogables una sola vez por 30 más). La rectificación,
               supresión y oposición son siempre gratuitas; el acceso es gratuito
               al menos una vez por trimestre.
