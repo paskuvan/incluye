@@ -154,6 +154,28 @@
 - [x] `organizations.logo_url` + bucket Storage `org-logos` (RLS por org) + `get_public_company` con logo (`supabase/migrations/0015_org_logo.sql`)
 - [x] Subir/cambiar/quitar logo en editar empresa; se muestra en el panel y el perfil público
 
+## Fase 28 — PWA instalable (hecho)
+- [x] `manifest.ts` con íconos 192/512 + maskable; íconos generados desde el favicon
+- [x] Service worker (`public/sw.js`, network-first) + registro (`src/app/sw-register.tsx`)
+- [x] `theme-color`, apple-touch-icon y `appleWebApp` en el layout
+- [ ] Verificar instalación en navegador real/HTTPS (el panel embebido bloquea SW)
+
+## Fase 29 — Registro de auditoría (hecho)
+- [x] Tabla `audit_log` (solo lectura admin) + `log_audit()` (`supabase/migrations/0018_audit_log.sql`)
+- [x] Triggers en empresas y vacantes (alta/baja); ARCO (export/delete) dentro de sus funciones
+- [x] Panel `/admin/auditoria` (Ley 21.719, Art. 14 sexies)
+
+## Fase 30 — MFA / doble factor (hecho)
+- [x] Enrolamiento TOTP con QR en `/dashboard/cuenta` (`mfa-manager.tsx`)
+- [x] Paso de código en el login (challenge/verify, aal2) (`login/page.tsx`)
+- [ ] Verificar con una app de autenticación real
+
+## Fase 31 — Perfil de candidato + postulaciones (hecho)
+- [x] Tablas `candidate_profiles` y `applications` con RLS + `org_applications()` (`supabase/migrations/0019_candidates.sql`)
+- [x] Editor de perfil + "mis postulaciones" (`/dashboard/perfil-candidato`)
+- [x] Postulación interna en `/empleos` (`apply-button.tsx`); externas mantienen enlace a la fuente
+- [x] Vista de postulantes por empresa con cambio de estado (`/dashboard/org/[orgId]/postulaciones`)
+
 ## Fase 27 — SEO (hecho)
 - [x] Metadata global: `metadataBase`, plantilla de títulos, Open Graph + Twitter Card, keywords, robots (`src/app/layout.tsx`, `src/lib/site.ts`)
 - [x] `robots.txt` (bloquea panel/admin/auth) y `sitemap.xml` (rutas públicas + perfiles de empresa dinámicos) (`src/app/robots.ts`, `src/app/sitemap.ts`)

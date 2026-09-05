@@ -14,7 +14,7 @@ export default async function EmpleosPage() {
   const { data: jobs } = await supabase
     .from("jobs")
     .select(
-      "id, company_name, title, description, region, modality, employment_type, apply_url, apply_email, source, source_name",
+      "id, company_name, title, description, region, modality, employment_type, apply_url, apply_email, source, source_name, organization_id",
     )
     .eq("status", "open")
     .order("created_at", { ascending: false });

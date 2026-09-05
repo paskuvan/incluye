@@ -19,10 +19,62 @@ export default function LoginPage() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Paso de verificación en dos pasos (si la cuenta tiene MFA activo).
+  const [mfa, setMfa] = useState<{ factorId: string; challengeId: string } | null>(
+    null,
+  );
+  const [mfaCode, setMfaCode] = useState("");
+
   function switchMode(next: Mode) {
     setMode(next);
     setError(null);
     setMessage(null);
+  }
+
+  /**
+   * Tras autenticar con contraseña: si la cuenta requiere segundo factor,
+   * inicia el desafío TOTP y muestra el paso del código; si no, entra.
+   */
+  async function proceedAfterPassword(supabase: ReturnType<typeof createClient>) {
+    const { data: aal } =
+      await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+    if (aal && aal.nextLevel === "aal2" && aal.nextLevel !== aal.currentLevel) {
+      const { data: factors } = await supabase.auth.mfa.listFactors();
+      const totp = (factors?.totp ?? []).find((f) => f.status === "verified");
+      if (totp) {
+        const { data: ch, error: chErr } = await supabase.auth.mfa.challenge({
+          factorId: totp.id,
+        });
+        if (chErr || !ch) {
+          setError(chErr?.message ?? "No se pudo iniciar la verificación.");
+          return;
+        }
+        setMfa({ factorId: totp.id, challengeId: ch.id });
+        return;
+      }
+    }
+    router.push("/dashboard");
+    router.refresh();
+  }
+
+  async function submitMfa(e: React.FormEvent) {
+    e.preventDefault();
+    if (!mfa) return;
+    setLoading(true);
+    setError(null);
+    const supabase = createClient();
+    const { error } = await supabase.auth.mfa.verify({
+      factorId: mfa.factorId,
+      challengeId: mfa.challengeId,
+      code: mfaCode.trim(),
+    });
+    if (error) {
+      setError("Código incorrecto. Intenta de nuevo.");
+      setLoading(false);
+      return;
+    }
+    router.push("/dashboard");
+    router.refresh();
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -40,8 +92,7 @@ export default function LoginPage() {
       if (error) {
         setError(error.message);
       } else {
-        router.push("/dashboard");
-        router.refresh();
+        await proceedAfterPassword(supabase);
       }
     } else {
       if (!acceptPolicy) {
@@ -96,6 +147,44 @@ export default function LoginPage() {
         </Link>
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          {mfa ? (
+            /* Paso de verificación en dos pasos */
+            <div>
+              <h1 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                Verificación en dos pasos
+              </h1>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                Escribe el código de 6 dígitos de tu app de autenticación.
+              </p>
+              <form onSubmit={submitMfa} className="mt-5 space-y-4">
+                <input
+                  autoFocus
+                  value={mfaCode}
+                  onChange={(e) =>
+                    setMfaCode(e.target.value.replace(/\D/g, "").slice(0, 6))
+                  }
+                  inputMode="numeric"
+                  autoComplete="one-time-code"
+                  placeholder="123456"
+                  aria-label="Código de verificación"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-center text-xl tracking-[0.4em] outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                />
+                {error && (
+                  <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950/40 dark:text-red-400">
+                    {error}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={loading || mfaCode.length !== 6}
+                  className="w-full rounded-lg bg-indigo-600 py-2.5 text-sm font-medium text-white transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {loading ? "Verificando…" : "Verificar e ingresar"}
+                </button>
+              </form>
+            </div>
+          ) : (
+          <>
           {/* Selector segmentado Ingresar / Crear cuenta */}
           <div
             role="tablist"
@@ -239,6 +328,8 @@ export default function LoginPage() {
                 ¿Olvidaste tu contraseña?
               </Link>
             </p>
+          )}
+          </>
           )}
         </div>
       </div>

@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { siteUrl, siteName, siteDescription } from "@/lib/site";
+import ServiceWorkerRegister from "./sw-register";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -60,8 +61,20 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.png?v=2",
-    apple: "/favicon.png?v=2",
+    apple: "/icon-192.png",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: siteName,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#060814" },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -70,7 +83,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es-CL"
       className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <ServiceWorkerRegister />
+      </body>
     </html>
   );
 }

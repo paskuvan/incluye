@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import AccountForm from "./account-form";
+import MfaManager from "./mfa-manager";
 
 export default async function CuentaPage() {
   const supabase = await createClient();
@@ -25,7 +26,10 @@ export default async function CuentaPage() {
         </p>
       </div>
 
-      <AccountForm email={user.email ?? ""} />
+      <AccountForm
+        email={user.email ?? ""}
+        securitySlot={<MfaManager />}
+      />
     </div>
   );
 }

@@ -15,7 +15,13 @@ function Notice({ ok, children }: { ok: boolean; children: React.ReactNode }) {
   );
 }
 
-export default function AccountForm({ email }: { email: string }) {
+export default function AccountForm({
+  email,
+  securitySlot,
+}: {
+  email: string;
+  securitySlot?: React.ReactNode;
+}) {
   const router = useRouter();
   const supabase = createClient();
 
@@ -168,6 +174,9 @@ export default function AccountForm({ email }: { email: string }) {
         </form>
         {emailMsg && <div className="mt-2"><Notice ok={emailMsg.ok}>{emailMsg.text}</Notice></div>}
       </section>
+
+      {/* Verificación en dos pasos (MFA) */}
+      {securitySlot}
 
       {/* Tus datos y derechos (Ley 21.719) */}
       <section className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">

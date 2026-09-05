@@ -65,6 +65,17 @@ export default function AdminHome() {
             Edita categorías, guías y enlaces de la sección de recursos.
           </p>
         </Link>
+
+        <Link
+          href="/admin/auditoria"
+          className="rounded-2xl border border-slate-200 bg-white p-6 transition-colors hover:border-indigo-400 dark:border-slate-800 dark:bg-slate-900"
+        >
+          <div className="text-2xl">📋</div>
+          <h2 className="mt-3 font-semibold">Registro de auditoría</h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            Traza quién creó, eliminó o exportó datos (Ley 21.719).
+          </p>
+        </Link>
       </div>
     </div>
   );

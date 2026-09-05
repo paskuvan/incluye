@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import ApplyButton from "./apply-button";
 
 export type Job = {
   id: string;
@@ -14,6 +15,7 @@ export type Job = {
   apply_email: string | null;
   source: string | null;
   source_name: string | null;
+  organization_id: string | null;
 };
 
 export default function EmpleosView({ jobs }: { jobs: Job[] }) {
@@ -100,15 +102,21 @@ export default function EmpleosView({ jobs }: { jobs: Job[] }) {
                       )}
                     </p>
                   </div>
-                  {applyHref && (
-                    <a
-                      href={applyHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500"
-                    >
-                      Postular
-                    </a>
+                  {/* Vacante de una empresa en Incluye: postulación interna.
+                      Externa/curada: enlace a la fuente. */}
+                  {j.organization_id && j.source !== "externa" ? (
+                    <ApplyButton jobId={j.id} jobTitle={j.title} />
+                  ) : (
+                    applyHref && (
+                      <a
+                        href={applyHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500"
+                      >
+                        Postular
+                      </a>
+                    )
                   )}
                 </div>
 
