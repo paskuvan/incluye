@@ -1,4 +1,13 @@
 import Link from "next/link";
+import {
+  ClipboardDocumentCheckIcon,
+  DocumentChartBarIcon,
+  CheckCircleIcon,
+  BriefcaseIcon,
+  HandRaisedIcon,
+  ChatBubbleLeftRightIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
 import PublicNav, { PublicFooter } from "@/components/public-nav";
 import { createClient } from "@/lib/supabase/server";
 
@@ -87,7 +96,10 @@ export default async function Home() {
           {empresa.map((m) => (
             <Link key={m.title} href={m.href} className="h-full">
               <div className="h-full rounded-2xl border border-slate-200 p-6 transition-colors hover:border-indigo-400 dark:border-slate-800">
-                <div className="text-2xl">{m.icon}</div>
+                <m.icon
+                  className="h-8 w-8 text-indigo-500"
+                  aria-hidden="true"
+                />
                 <h3 className="mt-3 font-semibold">{m.title}</h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                   {m.desc}
@@ -107,7 +119,10 @@ export default async function Home() {
           {comunidad.map((m) => (
             <Link key={m.title} href={m.href} className="h-full">
               <div className="h-full rounded-2xl border border-slate-200 p-6 transition-colors hover:border-indigo-400 dark:border-slate-800">
-                <div className="text-2xl">{m.icon}</div>
+                <m.icon
+                  className="h-8 w-8 text-indigo-500"
+                  aria-hidden="true"
+                />
                 <h3 className="mt-3 font-semibold">{m.title}</h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                   {m.desc}
@@ -144,25 +159,25 @@ export default async function Home() {
 
 const empresa = [
   {
-    icon: "📋",
+    icon: ClipboardDocumentCheckIcon,
     title: "Autoevaluación",
     desc: "Checklist guiado con puntaje y recomendaciones automáticas.",
     href: "/login",
   },
   {
-    icon: "📊",
+    icon: DocumentChartBarIcon,
     title: "Reportes y certificado",
     desc: "Estado de cumplimiento de la Ley 21.015 exportable a PDF.",
     href: "/login",
   },
   {
-    icon: "✅",
+    icon: CheckCircleIcon,
     title: "Plan de acción",
     desc: "Convierte las recomendaciones en tareas con responsable y fecha.",
     href: "/login",
   },
   {
-    icon: "💼",
+    icon: BriefcaseIcon,
     title: "Publica empleos",
     desc: "Difunde tus vacantes inclusivas y llega al 1% de la ley.",
     href: "/login",
@@ -171,25 +186,25 @@ const empresa = [
 
 const comunidad = [
   {
-    icon: "💼",
+    icon: BriefcaseIcon,
     title: "Empleos inclusivos",
     desc: "Vacantes de empresas comprometidas con la inclusión.",
     href: "/empleos",
   },
   {
-    icon: "🤟",
+    icon: HandRaisedIcon,
     title: "Glosario LSCh",
     desc: "Señas útiles por rubro, con video, para atender a personas sordas.",
     href: "/glosario",
   },
   {
-    icon: "💬",
+    icon: ChatBubbleLeftRightIcon,
     title: "Experiencias reales",
     desc: "Lo que vivió la comunidad: transparencia contra la falsa inclusión.",
     href: "/experiencias",
   },
   {
-    icon: "🧑‍💼",
+    icon: UserGroupIcon,
     title: "Gestores de inclusión",
     desc: "Qué exige la Ley 21.275 y cómo verificar en ChileValora.",
     href: "/gestores",

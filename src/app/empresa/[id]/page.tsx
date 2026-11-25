@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { HandRaisedIcon } from "@heroicons/react/24/outline";
 import PublicNav, { PublicFooter } from "@/components/public-nav";
 import { createClient } from "@/lib/supabase/server";
 import { scoreLevel } from "@/lib/assessment/scoring";
@@ -106,7 +107,7 @@ export default async function EmpresaPublicaPage({
         {/* Sello: comunicación con personas sordas */}
         {esReferenteSordos && (
           <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-sm font-medium text-indigo-800 dark:border-indigo-900 dark:bg-indigo-950/50 dark:text-indigo-200">
-            <span aria-hidden="true">🤟</span>
+            <HandRaisedIcon className="h-4 w-4" aria-hidden="true" />
             Referente en comunicación con personas sordas
           </div>
         )}

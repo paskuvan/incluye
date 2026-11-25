@@ -1,4 +1,12 @@
 import Link from "next/link";
+import {
+  BuildingOffice2Icon,
+  TrashIcon,
+  BriefcaseIcon,
+  ArrowDownTrayIcon,
+  ExclamationTriangleIcon,
+  DocumentIcon,
+} from "@heroicons/react/24/outline";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata = { title: "Registro de auditoría" };
@@ -12,13 +20,15 @@ type AuditRow = {
   created_at: string;
 };
 
-const ACTION_LABEL: Record<string, { label: string; icon: string }> = {
-  organization_create: { label: "Creó una empresa", icon: "🏢" },
-  organization_delete: { label: "Eliminó una empresa", icon: "🗑️" },
-  job_create: { label: "Publicó una vacante", icon: "💼" },
-  job_delete: { label: "Eliminó una vacante", icon: "🗑️" },
-  data_export: { label: "Descargó sus datos", icon: "📥" },
-  account_delete: { label: "Eliminó su cuenta", icon: "⚠️" },
+type IconType = React.ComponentType<{ className?: string }>;
+
+const ACTION_LABEL: Record<string, { label: string; icon: IconType }> = {
+  organization_create: { label: "Creó una empresa", icon: BuildingOffice2Icon },
+  organization_delete: { label: "Eliminó una empresa", icon: TrashIcon },
+  job_create: { label: "Publicó una vacante", icon: BriefcaseIcon },
+  job_delete: { label: "Eliminó una vacante", icon: TrashIcon },
+  data_export: { label: "Descargó sus datos", icon: ArrowDownTrayIcon },
+  account_delete: { label: "Eliminó su cuenta", icon: ExclamationTriangleIcon },
 };
 
 function fmt(iso: string): string {
@@ -75,18 +85,22 @@ export default async function AuditoriaPage() {
               {rows.map((r) => {
                 const meta = ACTION_LABEL[r.action] ?? {
                   label: r.action,
-                  icon: "•",
+                  icon: DocumentIcon,
                 };
+                const Icon = meta.icon;
                 return (
                   <tr
                     key={r.id}
                     className="border-b border-slate-50 last:border-0 dark:border-slate-800/50"
                   >
                     <td className="px-4 py-3">
-                      <span className="mr-2" aria-hidden="true">
-                        {meta.icon}
+                      <span className="inline-flex items-center gap-2">
+                        <Icon
+                          className="h-4 w-4 shrink-0 text-slate-400"
+                          aria-hidden="true"
+                        />
+                        {meta.label}
                       </span>
-                      {meta.label}
                     </td>
                     <td className="px-4 py-3 text-slate-500 dark:text-slate-400">
                       {r.actor_email ?? "—"}

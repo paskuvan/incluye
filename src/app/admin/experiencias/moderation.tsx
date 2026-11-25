@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { StarIcon } from "@heroicons/react/24/solid";
 import { createClient } from "@/lib/supabase/client";
 
 export type ExpRow = {
@@ -82,7 +83,18 @@ export default function Moderation({ rows }: { rows: ExpRow[] }) {
           <p className="mt-1 text-xs text-slate-400">
             Comunicación: {bool(e.had_interpreter)} · Proceso:{" "}
             {bool(e.process_accessible)} · Inclusión real: {bool(e.offer_real)}
-            {e.rating != null && ` · ${e.rating}★`}
+            {e.rating != null && (
+              <>
+                {" · "}
+                <span className="inline-flex items-center gap-0.5">
+                  {e.rating}
+                  <StarIcon
+                    className="h-3 w-3 text-amber-500"
+                    aria-hidden="true"
+                  />
+                </span>
+              </>
+            )}
             {e.contact_email && ` · ${e.contact_email}`}
           </p>
 

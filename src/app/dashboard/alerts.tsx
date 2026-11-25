@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BellIcon } from "@heroicons/react/24/outline";
 import type { Reminders } from "@/lib/reminders";
 import EmailRemindersButton from "./email-reminders-button";
 
@@ -30,7 +31,7 @@ export default function Alerts({ reminders }: { reminders: Reminders }) {
               : "text-amber-900 dark:text-amber-200"
           }`}
         >
-          🔔 Recordatorios{" "}
+          <BellIcon className="h-5 w-5" aria-hidden="true" /> Recordatorios{" "}
           <span
             className={`rounded-full px-2 py-0.5 text-xs ${
               empty

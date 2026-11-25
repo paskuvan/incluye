@@ -1,4 +1,11 @@
 import Link from "next/link";
+import {
+  BuildingOffice2Icon,
+  ChartBarIcon,
+  CheckCircleIcon,
+  BellIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/24/outline";
 import { createClient } from "@/lib/supabase/server";
 import { getReminders } from "@/lib/reminders";
 import { scoreLevel } from "@/lib/assessment/scoring";
@@ -13,12 +20,12 @@ function StatCard({
   label,
   value,
   hint,
-  icon,
+  icon: Icon,
 }: {
   label: string;
   value: string;
   hint?: string;
-  icon: string;
+  icon: React.ComponentType<{ className?: string }>;
 }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
@@ -26,7 +33,7 @@ function StatCard({
         <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
           {label}
         </span>
-        <span className="text-lg">{icon}</span>
+        <Icon className="h-5 w-5 text-slate-400" aria-hidden="true" />
       </div>
       <p className="mt-2 text-2xl font-bold">{value}</p>
       {hint && (
@@ -155,23 +162,27 @@ export default async function DashboardPage() {
 
       {/* KPIs */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Empresas" value={String(orgs.length)} icon="🏢" />
+        <StatCard
+          label="Empresas"
+          value={String(orgs.length)}
+          icon={BuildingOffice2Icon}
+        />
         <StatCard
           label="Accesibilidad prom."
           value={avg != null ? `${avg}%` : "—"}
           hint={avg != null ? scoreLevel(avg).label : "sin datos"}
-          icon="📊"
+          icon={ChartBarIcon}
         />
         <StatCard
           label="Evaluadas"
           value={`${scored.length}/${orgs.length}`}
-          icon="✅"
+          icon={CheckCircleIcon}
         />
         <StatCard
           label="Recordatorios"
           value={String(reminders.total)}
           hint={reminders.total > 0 ? "requieren atención" : "al día"}
-          icon="🔔"
+          icon={BellIcon}
         />
       </div>
 
@@ -252,9 +263,10 @@ export default async function DashboardPage() {
                       aria-label={`Editar ${org.name}`}
                       className="text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400"
                     >
-                      <span className="text-sm" aria-hidden="true">
-                        ✎
-                      </span>
+                      <PencilSquareIcon
+                        className="h-5 w-5"
+                        aria-hidden="true"
+                      />
                     </Link>
                     <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
                       {m.role}

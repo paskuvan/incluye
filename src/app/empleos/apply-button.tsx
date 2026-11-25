@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { createClient } from "@/lib/supabase/client";
 
 export default function ApplyButton({
@@ -73,8 +74,9 @@ export default function ApplyButton({
 
   if (done) {
     return (
-      <span className="rounded-lg bg-green-100 px-3 py-2 text-sm font-medium text-green-800 dark:bg-green-950 dark:text-green-300">
-        ✓ Postulación enviada
+      <span className="inline-flex items-center gap-1.5 rounded-lg bg-green-100 px-3 py-2 text-sm font-medium text-green-800 dark:bg-green-950 dark:text-green-300">
+        <CheckCircleIcon className="h-4 w-4" aria-hidden="true" />
+        Postulación enviada
       </span>
     );
   }

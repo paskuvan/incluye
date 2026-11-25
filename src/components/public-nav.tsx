@@ -1,25 +1,81 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/outline";
 
-const LINKS = [
-  { href: "/empleos", label: "Empleos" },
-  { href: "/experiencias", label: "Experiencias" },
-  { href: "/empresas", label: "Empresas" },
-  { href: "/gestores", label: "Gestores" },
-  { href: "/interpretes", label: "Intérpretes" },
-  { href: "/recursos", label: "Recursos" },
-  { href: "/glosario", label: "Glosario LSCh" },
+// Enlace directo (acción principal).
+const DIRECT = { href: "/empleos", label: "Empleos" };
+
+// Menús agrupados por tema (Opción A).
+const GROUPS = [
+  {
+    id: "comunidad",
+    label: "Comunidad",
+    items: [
+      { href: "/empresas", label: "Empresas valoradas" },
+      { href: "/experiencias", label: "Experiencias reales" },
+    ],
+  },
+  {
+    id: "apoyo",
+    label: "Apoyo",
+    items: [
+      { href: "/gestores", label: "Gestores de inclusión" },
+      { href: "/interpretes", label: "Intérpretes LSCh" },
+    ],
+  },
+  {
+    id: "recursos",
+    label: "Recursos",
+    items: [
+      { href: "/recursos", label: "Guías y marco legal" },
+      { href: "/glosario", label: "Glosario LSCh" },
+    ],
+  },
 ];
 
 export default function PublicNav() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // menú móvil
+  const [openGroup, setOpenGroup] = useState<string | null>(null); // desplegable escritorio
+  const navRef = useRef<HTMLElement>(null);
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
+  const groupActive = (items: { href: string }[]) =>
+    items.some((i) => isActive(i.href));
+
+  // Cerrar los desplegables al hacer clic fuera o presionar Escape.
+  useEffect(() => {
+    if (!openGroup) return;
+    const onClick = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenGroup(null);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenGroup(null);
+    };
+    document.addEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [openGroup]);
+
+  const itemClass = (href: string) =>
+    `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+      isActive(href)
+        ? "bg-indigo-600 text-white"
+        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+    }`;
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/80 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/80">
@@ -33,20 +89,60 @@ export default function PublicNav() {
         </Link>
 
         {/* Desktop */}
-        <nav className="hidden items-center gap-1 md:flex">
-          {LINKS.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                isActive(l.href)
-                  ? "bg-indigo-600 text-white"
-                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
-              }`}
-            >
-              {l.label}
-            </Link>
-          ))}
+        <nav ref={navRef} className="hidden items-center gap-1 md:flex">
+          <Link href={DIRECT.href} className={itemClass(DIRECT.href)}>
+            {DIRECT.label}
+          </Link>
+
+          {GROUPS.map((g) => {
+            const isOpen = openGroup === g.id;
+            const active = groupActive(g.items);
+            return (
+              <div key={g.id} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setOpenGroup(isOpen ? null : g.id)}
+                  aria-expanded={isOpen}
+                  aria-haspopup="menu"
+                  className={`flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    active || isOpen
+                      ? "bg-indigo-600 text-white"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                  }`}
+                >
+                  {g.label}
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {isOpen && (
+                  <div
+                    role="menu"
+                    className="absolute right-0 top-full mt-2 w-56 overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-lg dark:border-slate-800 dark:bg-slate-900"
+                  >
+                    {g.items.map((l) => (
+                      <Link
+                        key={l.href}
+                        href={l.href}
+                        role="menuitem"
+                        onClick={() => setOpenGroup(null)}
+                        className={`block px-4 py-2 text-sm font-medium transition-colors ${
+                          isActive(l.href)
+                            ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-500/15 dark:text-indigo-300"
+                            : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                        }`}
+                      >
+                        {l.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
           <Link
             href="/login"
             className="ml-2 rounded-full bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500"
@@ -69,9 +165,11 @@ export default function PublicNav() {
             aria-expanded={open}
             className="rounded-lg border border-slate-300 p-2 dark:border-slate-700"
           >
-            <span aria-hidden="true" className="block text-lg leading-none">
-              {open ? "✕" : "☰"}
-            </span>
+            {open ? (
+              <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <Bars3Icon className="h-5 w-5" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>
@@ -80,19 +178,42 @@ export default function PublicNav() {
       {open && (
         <nav className="border-t border-slate-200 bg-white px-6 py-3 md:hidden dark:border-slate-800 dark:bg-slate-950">
           <ul className="space-y-1">
-            {LINKS.map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className={`block rounded-lg px-3 py-2 text-sm font-medium ${
-                    isActive(l.href)
-                      ? "bg-indigo-600 text-white"
-                      : "text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
-                  }`}
-                >
-                  {l.label}
-                </Link>
+            <li>
+              <Link
+                href={DIRECT.href}
+                onClick={() => setOpen(false)}
+                className={`block rounded-lg px-3 py-2 text-sm font-medium ${
+                  isActive(DIRECT.href)
+                    ? "bg-indigo-600 text-white"
+                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                }`}
+              >
+                {DIRECT.label}
+              </Link>
+            </li>
+
+            {GROUPS.map((g) => (
+              <li key={g.id}>
+                <div className="px-3 pb-1 pt-3 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                  {g.label}
+                </div>
+                <ul className="space-y-1">
+                  {g.items.map((l) => (
+                    <li key={l.href}>
+                      <Link
+                        href={l.href}
+                        onClick={() => setOpen(false)}
+                        className={`block rounded-lg px-3 py-2 text-sm font-medium ${
+                          isActive(l.href)
+                            ? "bg-indigo-600 text-white"
+                            : "text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                        }`}
+                      >
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ul>

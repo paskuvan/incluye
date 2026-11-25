@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CheckIcon, XMarkIcon, StarIcon } from "@heroicons/react/24/solid";
 import PublicNav, { PublicFooter } from "@/components/public-nav";
 import { createClient } from "@/lib/supabase/server";
 import ExperienceForm from "./experience-form";
@@ -31,7 +32,14 @@ function Chip({ label, value }: { label: string; value: boolean | null }) {
           : "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300"
       }`}
     >
-      {value ? "✓" : "✕"} {label}
+      <span className="inline-flex items-center gap-1">
+        {value ? (
+          <CheckIcon className="h-3 w-3" aria-hidden="true" />
+        ) : (
+          <XMarkIcon className="h-3 w-3" aria-hidden="true" />
+        )}
+        {label}
+      </span>
     </span>
   );
 }
@@ -102,11 +110,18 @@ export default async function ExperienciasPage() {
                       )}
                     </h3>
                     {e.rating != null && (
-                      <span className="text-sm text-amber-500">
-                        {"★".repeat(e.rating)}
-                        <span className="text-slate-300 dark:text-slate-700">
-                          {"★".repeat(5 - e.rating)}
-                        </span>
+                      <span className="inline-flex">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <StarIcon
+                            key={i}
+                            className={`h-4 w-4 ${
+                              i < e.rating!
+                                ? "text-amber-500"
+                                : "text-slate-300 dark:text-slate-700"
+                            }`}
+                            aria-hidden="true"
+                          />
+                        ))}
                       </span>
                     )}
                   </div>

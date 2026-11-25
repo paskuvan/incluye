@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { CheckIcon } from "@heroicons/react/24/solid";
 import { createClient } from "@/lib/supabase/client";
 
 export type Gestor = {
@@ -88,8 +89,9 @@ export default function GestorManager({
                   <p className="truncate text-sm font-medium">
                     {g.name}
                     {g.certified && (
-                      <span className="ml-2 rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-semibold text-green-800 dark:bg-green-950 dark:text-green-300">
-                        ✓ Certificado/a
+                      <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-semibold text-green-800 dark:bg-green-950 dark:text-green-300">
+                        <CheckIcon className="h-3 w-3" aria-hidden="true" />
+                        Certificado/a
                       </span>
                     )}
                   </p>

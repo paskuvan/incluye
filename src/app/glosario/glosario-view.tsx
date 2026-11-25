@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { HandRaisedIcon } from "@heroicons/react/24/outline";
 import type { Rubro } from "@/lib/reference/glosario-lsch";
 
 export default function GlosarioView({ rubros }: { rubros: Rubro[] }) {
@@ -108,8 +109,8 @@ export default function GlosarioView({ rubros }: { rubros: Rubro[] }) {
                         className="mt-3 aspect-video w-full rounded-lg bg-black"
                       />
                     ) : (
-                      <div className="mt-3 flex h-20 items-center justify-center rounded-lg border border-dashed border-slate-300 text-2xl text-slate-300 dark:border-slate-700">
-                        🤟
+                      <div className="mt-3 flex h-20 items-center justify-center rounded-lg border border-dashed border-slate-300 text-slate-300 dark:border-slate-700">
+                        <HandRaisedIcon className="h-8 w-8" aria-hidden="true" />
                       </div>
                     )}
                   </div>
