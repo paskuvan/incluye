@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { createClient } from "@/lib/supabase/client";
 
 export type Task = {
@@ -188,7 +189,7 @@ export default function PlanBoard({
                           aria-label="Eliminar tarea"
                           className="rounded-lg border border-slate-300 px-2 py-1 text-xs text-red-600 hover:border-red-300 dark:border-slate-700"
                         >
-                          <span aria-hidden="true">✕</span>
+                          <XMarkIcon className="h-4 w-4" aria-hidden="true" />
                         </button>
                       </div>
                     </div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { createClient } from "@/lib/supabase/client";
 
 function Notice({ ok, children }: { ok: boolean; children: React.ReactNode }) {
@@ -188,9 +189,10 @@ export default function AccountForm({
 
         {/* Aviso: qué incluye la descarga */}
         <div className="mt-4 flex gap-3 rounded-xl border border-indigo-200 bg-indigo-50 p-4 text-sm text-indigo-900 dark:border-indigo-900 dark:bg-indigo-950/40 dark:text-indigo-200">
-          <span aria-hidden="true" className="text-base leading-none">
-            ℹ️
-          </span>
+          <InformationCircleIcon
+            className="h-5 w-5 shrink-0 text-indigo-500"
+            aria-hidden="true"
+          />
           <div>
             <p className="font-medium">Qué incluye la descarga</p>
             <p className="mt-0.5 text-indigo-800/90 dark:text-indigo-200/80">

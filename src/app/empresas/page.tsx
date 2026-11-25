@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { StarIcon } from "@heroicons/react/24/solid";
 import PublicNav, { PublicFooter } from "@/components/public-nav";
 import { createClient } from "@/lib/supabase/server";
 
@@ -130,7 +131,18 @@ export default async function EmpresasPage() {
                     <h2 className="font-semibold">{c.name}</h2>
                     <span className="text-sm text-slate-500 dark:text-slate-400">
                       {c.count} experiencia{c.count === 1 ? "" : "s"}
-                      {avg && <> · {avg}★</>}
+                      {avg && (
+                        <>
+                          {" · "}
+                          <span className="inline-flex items-center gap-0.5">
+                            {avg}
+                            <StarIcon
+                              className="h-3.5 w-3.5 text-amber-500"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </>
+                      )}
                     </span>
                   </div>
                   <div className="mt-2 flex flex-wrap gap-2">

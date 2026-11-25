@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { StarIcon } from "@heroicons/react/24/solid";
+import { HandRaisedIcon } from "@heroicons/react/24/outline";
 import { createClient } from "@/lib/supabase/client";
 
 type YesNo = "" | "si" | "no";
@@ -87,11 +89,12 @@ function Stars({
               onClick={() => onChange(value === n ? 0 : n)}
               onMouseEnter={() => setHover(n)}
               onMouseLeave={() => setHover(0)}
-              className="rounded p-0.5 text-2xl leading-none transition-transform hover:scale-110"
+              className="rounded p-0.5 leading-none transition-transform hover:scale-110"
             >
-              <span className={filled ? "text-amber-400" : "text-slate-300 dark:text-slate-600"}>
-                ★
-              </span>
+              <StarIcon
+                className={`h-7 w-7 ${filled ? "text-amber-400" : "text-slate-300 dark:text-slate-600"}`}
+                aria-hidden="true"
+              />
             </button>
           );
         })}
@@ -156,8 +159,9 @@ export default function ExperienceForm() {
   if (sent) {
     return (
       <div className="rounded-2xl border border-green-300 bg-green-50 p-6 text-sm text-green-800 dark:border-green-900 dark:bg-green-950/40 dark:text-green-200">
-        <p className="text-base font-semibold">
-          🙌 ¡Gracias por compartir tu experiencia!
+        <p className="flex items-center gap-2 text-base font-semibold">
+          <HandRaisedIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
+          ¡Gracias por compartir tu experiencia!
         </p>
         <p className="mt-1">
           La revisaremos antes de publicarla (para cuidar a todas las partes).

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { HandRaisedIcon } from "@heroicons/react/24/outline";
 import { createClient } from "@/lib/supabase/client";
 
 export type Applicant = {
@@ -57,8 +58,9 @@ export default function ApplicantsList({ initial }: { initial: Applicant[] }) {
               <div className="flex flex-wrap items-center gap-2">
                 <h3 className="font-semibold">{a.full_name ?? "Candidato/a"}</h3>
                 {a.uses_lsch && (
-                  <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
-                    🤟 LSCh
+                  <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+                    <HandRaisedIcon className="h-3 w-3" aria-hidden="true" />
+                    LSCh
                   </span>
                 )}
               </div>

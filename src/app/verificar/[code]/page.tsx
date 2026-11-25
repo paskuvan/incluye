@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import PublicNav, { PublicFooter } from "@/components/public-nav";
 import { createClient } from "@/lib/supabase/server";
 import { scoreLevel } from "@/lib/assessment/scoring";
@@ -33,8 +34,9 @@ export default async function VerificarCodePage({
 
         {row ? (
           <div className="mt-6 rounded-2xl border border-green-300 bg-green-50 p-6 dark:border-green-900 dark:bg-green-950/40">
-            <p className="text-sm font-semibold text-green-700 dark:text-green-300">
-              ✓ Certificado válido
+            <p className="flex items-center gap-2 text-sm font-semibold text-green-700 dark:text-green-300">
+              <CheckCircleIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
+              Certificado válido
             </p>
             <p className="mt-3 text-lg font-bold">{row.name}</p>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
@@ -52,8 +54,9 @@ export default async function VerificarCodePage({
           </div>
         ) : (
           <div className="mt-6 rounded-2xl border border-red-300 bg-red-50 p-6 dark:border-red-900 dark:bg-red-950/40">
-            <p className="text-sm font-semibold text-red-700 dark:text-red-300">
-              ✕ No encontramos un certificado con ese código.
+            <p className="flex items-center gap-2 text-sm font-semibold text-red-700 dark:text-red-300">
+              <XCircleIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
+              No encontramos un certificado con ese código.
             </p>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
               Revisa el código e inténtalo de nuevo.

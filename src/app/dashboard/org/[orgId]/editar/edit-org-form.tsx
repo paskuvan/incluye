@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { BuildingOffice2Icon } from "@heroicons/react/24/outline";
 import { createClient } from "@/lib/supabase/client";
 
 export default function EditOrgForm({
@@ -128,9 +129,10 @@ export default function EditOrgForm({
                 className="h-full w-full object-contain"
               />
             ) : (
-              <span className="text-2xl text-slate-300" aria-hidden="true">
-                🏢
-              </span>
+              <BuildingOffice2Icon
+                className="h-8 w-8 text-slate-300"
+                aria-hidden="true"
+              />
             )}
           </div>
           <div className="flex flex-wrap gap-2">
